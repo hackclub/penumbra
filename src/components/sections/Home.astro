@@ -41,6 +41,7 @@ import homeContainer from "../../assets/home-container.svg?raw";
     mask-image: linear-gradient(white), url("/public/vectors/home-container-mask.svg");
     mask-repeat: no-repeat;
     mask-position: center;
+    mask-size: 100vw;
     mask-composite: exclude;
   }
 
@@ -70,6 +71,11 @@ import homeContainer from "../../assets/home-container.svg?raw";
 
   #main-container {
     filter: drop-shadow(0 0 5px #fff);
+    width: 85vw;
+
+    & > :global(svg) {
+      width: 100%;
+    }
   }
 
   #bg {
