@@ -18,7 +18,6 @@ const int   RAYMARCH_MAX_ITERS  = 32;
 const float CAMERA_FOV = 0.3;
 const vec3  LIGHT_POS  = vec3(-2.0, 2.0, -1.0);
 
-const float PI          = 3.14159265358979323846;
 const float DEG2RAD     = PI / 180.0;
 const float ANIM_SPEED  = 1.0;
 
