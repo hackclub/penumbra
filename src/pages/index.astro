@@ -60,10 +60,13 @@ import Home from "../components/sections/Home.astro";
 
 <script>
   import * as THREE from "three";
+  import { lerp } from "three/src/math/MathUtils.js";
 
   import shaderBufferA from "../assets/shaders/bufferA.glsl?raw";
   import shaderBufferB from "../assets/shaders/bufferB.glsl?raw";
   import shaderImage from "../assets/shaders/image.glsl?raw";
+
+  const MOUSE_REACTIVITY = 0.15;
 
   const canvas = document.querySelector<HTMLCanvasElement>("#shader")!;
   const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
@@ -141,11 +144,13 @@ import Home from "../components/sections/Home.astro";
   uniformsB.iChannel0.value = rtA.texture;
   uniformsImage.iChannel0.value = rtB.texture;
 
+  let actualMouseX = 0, actualMouseY = 0;
+  let lerpedMouseX = 0, lerpedMouseY = 0;
+
   window.addEventListener("pointermove", e => {
     const rect = canvas.getBoundingClientRect();
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    const y = (rect.bottom - e.clientY) * (canvas.height / rect.height);
-    uniformsA.iMouse.value.set(x, y, 0, 0);
+    actualMouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    actualMouseY = (rect.bottom - e.clientY) * (canvas.height / rect.height);
   });
 
   function resizeRendererToDisplaySize(r: THREE.WebGLRenderer) {
@@ -203,6 +208,10 @@ import Home from "../components/sections/Home.astro";
 
     uniformsA.iTime.value = timeMs;
     uniformsB.iTime.value = timeMs;
+    lerpedMouseX = lerp(lerpedMouseX, actualMouseX, MOUSE_REACTIVITY);
+    lerpedMouseY = lerp(lerpedMouseY, actualMouseY, MOUSE_REACTIVITY);
+
+    uniformsA.iMouse.value.set(lerpedMouseX, lerpedMouseY, 0, 0);
 
     // Pass A -> rtA
     renderer.setRenderTarget(rtA);
