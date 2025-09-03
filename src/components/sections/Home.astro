@@ -1,87 +1,240 @@
 ---
-import homeContainer from "../../assets/home-container.svg?raw";
+import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 ---
 
 <section>
-  <div id="fg">
-    <div id="main-container" class="overlaid">
-      <Fragment set:html={homeContainer} />
+  <div class="unmasked">
+    <div class="fg">
+      <div class="main-container">
+        <div class="top">
+          <div class="left">
+            Make a shader. <br/>
+            We'll ship you the poster. <br/>
+            GPUs for the most dedicated.
+          </div>
+
+          <div class="right">
+            STATUS: ACTIVE <br/>
+            DEADLINE: 20 SEP 2025
+          </div>
+        </div>
+
+        <div class="bottom" />
+      </div>
     </div>
   </div>
 
-  <pre id="bg" aria-hidden="true" is:raw>
-    const float RAYMARCH_MIN_DIST = 0.3;
-    const float RAYMARCH_MAX_DIST = 50.0;
-    const float RAYMARCH_HIT_CUTOFF = 0.001;
-    const int RAYMARCH_MAX_ITERS = 32;
-    const float CAMERA_FOV = 0.3;
-    const vec3 LIGHT_POS = vec3(-2.0, 2.0, -1.0);
-    const float PI = 3.14159265358979323846;
-    const float DEG2RAD = PI / 180.0;
-    const float ANIM_SPEED = 1.0;
-    float clamp01(float x) { return clamp(x, 0.0, 1.0); }
-    vec3 clamp01(vec3 x) { return clamp(x, 0.0, 1.0); }
-    vec3 rotateX(vec3 p, float a) {
-      float c = cos(a), s = sin(a);    
-      return vec3(p.x, c * p.y - s * p.z, s * p.y + c * p.z);    
-    }
-    vec3 rotateY(vec3 p, float a) {
-      float c = cos(a), s = sin(a);    
-      return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z);    
-    }
-  </pre>
+  <div class="masked">
+    <div class="fg">
+      <div class="main-container">
+        <div class="top"></div>
+
+        <div class="bottom">
+          <div class="left">
+            <Fragment set:html={hackClubFlag} />
+            <h1>PENUMBRA</h1>
+          </div>
+
+          <nav class="right">
+            <ul>
+              <li>GETTING STARTED</li>
+              <li>RESOURCES & GUIDES</li>
+              <li>SUBMIT</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <pre class="bg" aria-hidden="true" is:raw>
+      const float RAYMARCH_MIN_DIST = 0.3;
+      const float RAYMARCH_MAX_DIST = 50.0;
+      const float RAYMARCH_HIT_CUTOFF = 0.001;
+      const int RAYMARCH_MAX_ITERS = 32;
+      const float CAMERA_FOV = 0.3;
+      const vec3 LIGHT_POS = vec3(-2.0, 2.0, -1.0);
+      const float PI = 3.14159265358979323846;
+      const float DEG2RAD = PI / 180.0;
+      const float ANIM_SPEED = 1.0;
+      float clamp01(float x) { return clamp(x, 0.0, 1.0); }
+      vec3 clamp01(vec3 x) { return clamp(x, 0.0, 1.0); }
+      vec3 rotateX(vec3 p, float a) {
+        float c = cos(a), s = sin(a);    
+        return vec3(p.x, c * p.y - s * p.z, s * p.y + c * p.z);    
+      }
+      vec3 rotateY(vec3 p, float a) {
+        float c = cos(a), s = sin(a);    
+        return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z);    
+      }
+    </pre>
+  </div>
 </section>
 
 <style lang="scss"> 
+  $text-glow-black: drop-shadow(0 0 21px rgba(0, 0, 0, 0.25));
+
   section {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #4b0131, #000004);
 
-    mask-image: linear-gradient(white), url("/public/vectors/home-container-mask.svg");
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: 100vw;
-    mask-composite: exclude;
+    > * {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    > .masked {
+      background: linear-gradient(135deg, #4b0131, #000004);
+
+      mask-image: linear-gradient(white), url("/public/vectors/home-container-mask.svg");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: 100vw;
+      mask-composite: exclude;
+    }
   }
 
-  #fg, #bg {
+  .fg, .bg {
     position: absolute;
     top: 0;
     right: 0;
     width: 100vw;
     height: 100vh;
     margin: 0;
+    font-family: Nothing, monospace;
   }
 
-  #fg {
+  .fg {
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
   }
 
-  .overlaid > * {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+  .masked > .fg > .main-container {
+    background: url("/public/vectors/home-container.svg");
+    background-size: contain;
   }
 
-  #main-container {
+  .main-container {
     filter: drop-shadow(0 0 5px #fff);
     width: 85vw;
+    height: (85vw * (205 / 431));
 
-    & > :global(svg) {
+    display: flex;
+    flex-direction: column;
+
+    $top-height: 69%; // yeah
+
+    > * {
       width: 100%;
+    }
+
+    > .top, > .bottom {
+      display: flex;
+      justify-content: space-between;
+
+      > * {
+        width: 50%;
+        height: 100%;
+      }
+    }
+
+    > .top {
+      height: $top-height;
+      font-size: 2em;
+      padding: 0 3em;
+      -webkit-font-smoothing: antialiased;
+
+      > * {
+        display: flex;
+        color: white;
+      }
+
+      > .left {
+        align-items: flex-end;
+        padding-bottom: 1em;
+        padding-left: .5em;
+        mix-blend-mode: difference;
+      }
+
+      > .right {
+        justify-content: flex-end;
+        text-align: right;
+        padding-top: 2em;
+      }
+    }
+
+    > .bottom {
+      height: 100% - $top-height;
+
+      > .left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2.75em 4em;
+        filter: $text-glow-black;
+        letter-spacing: -7%;
+
+        h1 {
+          font-family: Kleemax, monospace; 
+          font-size: 2.75em;
+          margin: 0;
+        }
+      }
+
+      > .right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 0.5em;
+        padding-right: 2em;
+        font-size: 2em;
+
+        ul {
+          list-style-type: none;
+          text-align: right;
+          
+          li {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            letter-spacing: -0.02em;
+            user-select: none;
+            padding: 0 .25em 0 2em;
+            cursor: pointer;
+            -webkit-font-smoothing: antialiased;
+
+            &:hover {
+              background: black;
+              color: white;
+
+              &::after {
+                filter: invert(1);
+              }
+            }
+
+            &::after {
+              content: "";
+              width: .75em;
+              height: .75em;
+              display: inline-block;
+              background: url("/public/vectors/link-arrow.svg");
+              background-size: contain;
+              margin: 4px;
+              margin-left: 12px;
+            }
+          }
+        }
+      }
     }
   }
 
-  #bg {
+  .bg {
     $text-color: #c4210f;
     text-align: right;
-    font-family: Nothing, monospace;
     font-size: 2em;
     padding: 1.5em;
     pointer-events: none;

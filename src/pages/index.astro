@@ -34,7 +34,14 @@ import Home from "../components/sections/Home.astro";
 
   @font-face {
     font-family: Nothing;
-    src: url("/fonts/nothing.otf") format("opentype");
+    src:
+      url("/fonts/nothing.ttf") format("truetype"),
+      url("/fonts/nothing.otf") format("opentype");
+  }
+
+  @font-face {
+    font-family: Kleemax;
+    src: url("/fonts/kleemax.otf") format("opentype");
   }
 </style>
 
@@ -55,6 +62,7 @@ import Home from "../components/sections/Home.astro";
 
     & > main {
       z-index: 1;
+      mix-blend-mode: difference;
     }
   }
 </style>
