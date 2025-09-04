@@ -1,0 +1,23 @@
+---
+import ShaderEditor from "../ShaderEditor.svelte";
+---
+
+<section>
+  <h1>GETTING STARTED</h1>
+  <p>
+    Penumbra is a Hack Club YSWS, where you create a shader,
+    and we print you a poster of it, free of charge!
+
+    What you will be writing is called a “fragment” shader.
+    For each pixel coordinate, it will return its color!
+  </p>
+
+  <ShaderEditor initialCode={`
+    // Input: coordinate, output: RGB color
+    vec3 fn(vec2 coord) {
+        // As we go further right, increase the
+        // red value. 
+        return vec3(coord.x, 0, 0);
+    }
+  `} client:load />
+</section>

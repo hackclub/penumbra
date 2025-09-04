@@ -21,6 +21,11 @@ const vec3  LIGHT_POS  = vec3(-2.0, 2.0, -1.0);
 const float DEG2RAD     = PI / 180.0;
 const float ANIM_SPEED  = 1.0;
 
+/*----------------------------*\
+|  > Custom uniforms           |
+\*----------------------------*/
+uniform float iScrollProgress;
+
 /*----------------------*\
 |  > Utilities           |
 \*----------------------*/
@@ -65,7 +70,6 @@ float sdDisplacement(vec3 p) {
     );
 }
 
-
 vec3 transformTwist(vec3 p, float k) {
     float c = cos(k * p.y);
     float s = sin(k * p.y);
@@ -76,18 +80,19 @@ vec3 transformTwist(vec3 p, float k) {
 
 // Gets the signed distance of the scene.
 float sdScene(vec3 p) {
-    const float MOUSE_DIVISOR = 12.0;
-    vec2 normMouse = iMouse.xy / iResolution.xy;
     
     //float t = iTime / 10.0;
     // -iMouse.z / 640.0
-    float t = 0.00;
-    
+    float t = iScrollProgress;
+
+    vec2 normMouse = iMouse.xy / iResolution.xy;
+    float mouseDivisor = 12.0 + (t * 10000.0);
+
     vec3 torusPos = p;
     torusPos -= vec3(
-        normMouse.x / MOUSE_DIVISOR + mix(0.0, 4.0, t),
-        normMouse.y / MOUSE_DIVISOR,
-        mix(0.0, 7.0, t)
+        normMouse.x / mouseDivisor + mix(0.0, 4.0, t),
+        normMouse.y / mouseDivisor,
+        0.0
     );
     
     torusPos = rotateX(torusPos, DEG2RAD * 20.0);

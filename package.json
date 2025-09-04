@@ -10,9 +10,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/svelte": "^7.1.0",
     "@types/three": "^0.179.0",
     "astro": "^5.13.2",
+    "codemirror": "^6.0.2",
+    "codemirror-lang-glsl": "^0.5.0",
     "sass": "^1.91.0",
-    "three": "^0.179.1"
+    "svelte": "^5.38.6",
+    "three": "^0.179.1",
+    "typescript": "^5.9.2"
   }
 }
