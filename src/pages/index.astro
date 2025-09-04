@@ -29,6 +29,13 @@ import Submit from "../components/sections/Submit.astro";
   * {
     box-sizing: border-box;
     overscroll-behavior: none;
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1 {
+    font-weight: normal;
   }
 
   html, body {
@@ -51,6 +58,8 @@ import Submit from "../components/sections/Submit.astro";
   }
 
   body {
+    font-family: Nothing, monospace;
+
     & > section {
       position: absolute;
       z-index: 1;

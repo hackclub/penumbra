@@ -65,11 +65,11 @@
           { tag: tags.keyword, class: "code-tag-keyword" },
           { tag: tags.typeName, class: "code-tag-keyword" }
         ])),
-        EditorView.theme({
-          "&": {
-            fontSize: "1.25em"
-          }
-        }),
+        // EditorView.theme({
+        //   "&": {
+        //     fontSize: "1.25em"
+        //   }
+        // }),
         EditorView.updateListener.of(ev => {
           if (!ev.docChanged)
             return;
@@ -94,6 +94,7 @@
 
     > .editor {
       color: #FFFFFF;
+      background: #0009;
 
       :global {
         * {

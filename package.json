@@ -15,6 +15,7 @@
     "astro": "^5.13.2",
     "codemirror": "^6.0.2",
     "codemirror-lang-glsl": "^0.5.0",
+    "dedent": "^1.7.0",
     "sass": "^1.91.0",
     "svelte": "^5.38.6",
     "three": "^0.179.1",

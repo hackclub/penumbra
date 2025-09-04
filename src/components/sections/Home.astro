@@ -113,8 +113,6 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
     }
 
     > .masked {
-      background: linear-gradient(135deg, #4b0131, #000004);
-
       mask-image: linear-gradient(white), url("/public/vectors/home-container-mask.svg");
       mask-repeat: no-repeat;
       mask-position: center;
@@ -178,7 +176,6 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       height: $top-height;
       font-size: var(--font-size-base);
       padding: 0 3em;
-      -webkit-font-smoothing: antialiased;
 
       > * {
         display: flex;
@@ -214,6 +211,7 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
           font-family: Kleemax, monospace; 
           font-size: 2.75em;
           margin: 0;
+          color: #000;
         }
       }
 
@@ -237,7 +235,6 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
             user-select: none;
             padding: 0 .25em 0 2em;
             cursor: pointer;
-            -webkit-font-smoothing: antialiased;
 
             &:hover {
               background: black;

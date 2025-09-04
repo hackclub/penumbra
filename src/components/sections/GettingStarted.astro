@@ -1,5 +1,7 @@
 ---
 import ShaderEditor from "../ShaderEditor.svelte";
+
+import dedent from "dedent";
 ---
 
 <section>
@@ -12,7 +14,7 @@ import ShaderEditor from "../ShaderEditor.svelte";
     For each pixel coordinate, it will return its color!
   </p>
 
-  <ShaderEditor initialCode={`
+  <ShaderEditor initialCode={dedent`
     // Input: coordinate, output: RGB color
     vec3 fn(vec2 coord) {
         // As we go further right, increase the
@@ -21,3 +23,11 @@ import ShaderEditor from "../ShaderEditor.svelte";
     }
   `} client:load />
 </section>
+
+<style lang="scss">
+  section {
+    color: white;
+    font-size: 1.5em;
+    padding: 2em;
+  }
+</style>
