@@ -148,9 +148,11 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
   }
 
   .main-container {
+    $size: 90vw;
+
     filter: drop-shadow(0 0 5px #fff);
-    width: 85vw;
-    height: (85vw * (205 / 431));
+    width: $size;
+    height: ($size * (205 / 431));
 
     display: flex;
     flex-direction: column;
