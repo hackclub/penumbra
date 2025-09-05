@@ -41,9 +41,9 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 
           <nav class="right">
             <ul>
-              <li class="anim-text">GETTING STARTED</li>
-              <li class="anim-text">RESOURCES & GUIDES</li>
-              <li class="anim-text">SUBMIT</li>
+              <li class="anim-text" data-goto="getting-started">GETTING STARTED</li>
+              <li class="anim-text" data-goto="resources-and-guides">RESOURCES & GUIDES</li>
+              <li class="anim-text" data-goto="submit">SUBMIT</li>
             </ul>
           </nav>
         </div>
@@ -280,5 +280,18 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
   const targets = document.querySelectorAll(".anim-text") as NodeListOf<HTMLElement>;
   for (const element of targets) {
     animateText(element, 3, 16);
+  }
+
+  for (const link of document.querySelectorAll<HTMLElement>("[data-goto]")) {
+    link.addEventListener("click", () => {
+      const anchor = document.getElementById(link.dataset.goto!);
+      if (!anchor) {
+        console.error(`No anchor element with ID ${link.dataset.goto} was found. Originating element:`, link);
+        return;
+      }
+
+      anchor.scrollIntoView({ behavior: "smooth" });
+    });
+
   }
 </script>

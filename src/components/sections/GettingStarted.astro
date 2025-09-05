@@ -4,7 +4,7 @@ import ShaderEditor from "../ShaderEditor.svelte";
 import dedent from "dedent";
 ---
 
-<section>
+<section id="getting-started">
   <h1>GETTING STARTED</h1>
   <p>
     Penumbra is a Hack Club YSWS, where you create a shader,
@@ -17,8 +17,7 @@ import dedent from "dedent";
   <ShaderEditor initialCode={dedent`
     // Input: coordinate, output: RGB color
     vec3 fn(vec2 coord) {
-        // As we go further right, increase the
-        // red value. 
+        // As we go further to the right, increase the red value. 
         return vec3(coord.x, 0, 0);
     }
   `} client:load />
@@ -28,6 +27,6 @@ import dedent from "dedent";
   section {
     color: white;
     font-size: 1.5em;
-    padding: 2em;
+    padding: 2em 4em;
   }
 </style>
