@@ -48,6 +48,21 @@ vec3 rotateZ(vec3 p, float a) {
     return vec3(c * p.x - s * p.y, s * p.x + c * p.y, p.z);
 }
 
+void partialLerp(inout vec3 current, vec3 to, inout float t) {
+    if (t > 1.0) {
+        t -= 1.0;
+        current = to;
+        return;
+    }
+
+    if (t < 0.0) {
+        return;
+    }
+
+    current = mix(current, to, t);
+    t = -1.0;
+}
+
 /*----------------------*\
 |  > Rendering           |
 \*----------------------*/
@@ -88,11 +103,16 @@ float sdScene(vec3 p) {
     vec2 normMouse = iMouse.xy / iResolution.xy;
     float mouseDivisor = 12.0 + (t * 10000.0);
 
+    // Torus offset based on scroll position
+    vec3 torusPagePos = vec3(0.0, 0.0, 0.0);
+    partialLerp(torusPagePos, vec3(4.0, 0.0, 0.0), t);
+    partialLerp(torusPagePos, vec3(4.5, 0.0, 0.0), t);
+
     vec3 torusPos = p;
     torusPos -= vec3(
-        normMouse.x / mouseDivisor + mix(0.0, 4.0, t),
-        normMouse.y / mouseDivisor,
-        0.0
+        normMouse.x / mouseDivisor + torusPagePos.x,
+        normMouse.y / mouseDivisor + torusPagePos.y,
+        torusPagePos.z
     );
     
     torusPos = rotateX(torusPos, DEG2RAD * 20.0);

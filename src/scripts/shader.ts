@@ -140,6 +140,10 @@ function onResize() {
     }
 }
 
+const scrollAnchors = document.querySelectorAll<HTMLElement>(".bg-scroll-anchor");
+
+let scrollAnchorPositions: number[] | null = null;
+
 function render(timeSecs: number) {
     const timeMs = timeSecs * 0.001;
 
@@ -148,7 +152,36 @@ function render(timeSecs: number) {
 
     uniformsA.iTime.value = timeMs;
     uniformsB.iTime.value = timeMs;
-    uniformsA.iScrollProgress.value = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+
+    let t = NaN;
+
+    if (scrollAnchorPositions == null) {
+        scrollAnchorPositions = [...scrollAnchors].map(x => x.getBoundingClientRect().top);
+        scrollAnchorPositions[0] = 0;
+        scrollAnchorPositions[scrollAnchors.length - 1] = (document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    for (let i = 0; i < scrollAnchors.length - 1; i++) {
+        const a = scrollAnchorPositions[i];
+        const b = scrollAnchorPositions[i + 1];
+        
+        if (!(window.scrollY >= a && window.scrollY <= b))
+            continue;
+
+        const height = b - a;
+        const scroll = window.scrollY - a;
+
+        t = (scroll / height) + i;
+        break;
+    }
+
+    if (isNaN(t)) {
+        console.error(`No scroll anchors found for y=${window.scrollY}.`, scrollAnchors, scrollAnchorPositions);
+        t = scrollAnchors.length;
+    }
+
+    uniformsA.iScrollProgress.value = t;
+    
     lerpedMouseX = lerp(lerpedMouseX, actualMouseX, MOUSE_REACTIVITY);
     lerpedMouseY = lerp(lerpedMouseY, actualMouseY, MOUSE_REACTIVITY);
 
