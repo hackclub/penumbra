@@ -1,32 +1,92 @@
 ---
+import DocumentSection from "../DocumentSection.astro";
 import ShaderEditor from "../ShaderEditor.svelte";
+import Jargon from "../Jargon.svelte";
 
 import dedent from "dedent";
 ---
 
-<section id="getting-started">
-  <h1>GETTING STARTED</h1>
+<DocumentSection id="getting-started">
+  <h1>&gt;&gt;&gt; getting started.</h1>
   <p>
-    Penumbra is a Hack Club YSWS, where you create a shader,
-    and we print you a poster of it, free of charge!
+    Penumbra is a Hack Club <Jargon client:load description="You Ship, We Ship">YSWS</Jargon> program, where
+    you ship art made with shaders, and we ship you posters of that art, free of charge! We're also giving
+    out RTX and RX GPUs for the most dedicated.
 
-    What you will be writing is called a “fragment” shader.
-    For each pixel coordinate, it will return its color!
+    <br class="bg-scroll-anchor"><br>
+
+    But first - let's explain what actually *is* a shader.
+    For each pixel coordinate, a “fragment” shader will return its color!
   </p>
 
-  <ShaderEditor initialCode={dedent`
+  <ShaderEditor client:load initialCode={dedent`
     // Input: coordinate, output: RGB color
     vec3 fn(vec2 coord) {
         // As we go further to the right, increase the red value. 
         return vec3(coord.x, 0, 0);
     }
-  `} client:load />
-</section>
+  `}/>
+
+  <p>
+    This language is called <Jargon client:load description="OpenGL Shading Language">GLSL</Jargon>.
+    Try messing around with the sandbox above!
+    
+    <br><br>
+
+    You're given
+    UV coordinates: they range from 0.0 to 1.0. (0.0, 0.0) is the bottom-right corner, and (1.0, 1.0)
+    is the top-left one. The center of the screen is at (0.5, 0.5).
+  </p>
+
+  <ShaderEditor client:load initialCode={dedent`
+    vec3 fn(vec2 coord) {
+        // Distance from the center - (0.5, 0.5). Try changing that vector!
+        float d = distance(vec2(0.5, 0.5), coord);
+        return vec3(d);
+    }
+  `}/>
+
+  <p>
+    There are multiple approaches to making art with shaders! Because what you're writing is just
+    a function, try using random math formulas, and see what happens!
+  </p>
+
+  <ShaderEditor client:load initialCode={dedent`
+    vec3 fn(vec2 coord) {
+        // Random fun with trig functions! Mess around with it!
+        float x = coord.x, y = coord.y;
+        float v = 15.0 * sin((x * x - y * y) * 10.0);
+        return vec3(
+            0.5 + 0.5 * sin(v),
+            0.0,
+            0.5 + 0.5 * sin(v + 4.0)
+        );
+    }
+  `}/>
+
+  <p>
+    You'll have to track your coding time using <a href="https://hackatime.hackclub.com/" target="_blank">Hackatime</a>.
+    You can either track your time from your favorite IDE or via the <a href="https://chromewebstore.google.com/">Chrome</a>
+    or <a href="">Firefox</a> WakaTime for ShaderToy extensions.
+  </p>
+
+  <p class="bg-scroll-anchor">
+    You'll be publishing your shaders on <a href="https://shadertoy.com/new" target="_blank"><em>ShaderToy</em></a>.
+    It's both a community and a sandbox for you to mess around with! It has plenty of examples and inspiration
+    for you to look at.
+  </p>
+</DocumentSection>
 
 <style lang="scss">
-  section {
-    color: white;
-    font-size: 1.5em;
-    padding: 2em 4em;
+  $transition-length: 20%;
+
+  :global(#getting-started) {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.00) 0%, 
+      rgba(0, 0, 0, 0.50) $transition-length, 
+      rgba(0, 0, 0, 0.50) 100% - $transition-length, 
+      rgba(0, 0, 0, 0.00) 100%
+    );
   }
 </style>

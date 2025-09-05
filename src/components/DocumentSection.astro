@@ -1,0 +1,68 @@
+---
+const { id } = Astro.props;
+interface Props {
+  id: string;
+}
+---
+
+<section class="doc-section" id={id}>
+  <div class="inner">
+    <slot/>
+  </div>
+</section>
+
+<script>
+  import { animateTyping, animateObfuscation } from "../scripts/text-anim";
+
+  for (const section of document.querySelectorAll(".doc-section > .inner")) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting === true)
+        return;
+
+      for (const element of section.querySelectorAll("h1")) {
+        animateTyping(element, 3, 12);
+      }
+
+      for (const element of section.querySelectorAll("p")) {
+        animateObfuscation(element, 8, 0.25);
+      }
+    }, { threshold: [0.1] });
+
+    observer.observe(section);
+  }
+</script>
+
+<style lang="scss" is:global>
+  .doc-section {
+    color: white;
+    font-size: 1.5em;
+    padding: 2em;
+    padding-top: 1em;
+
+    .inner {
+      width: 100%;
+      height: 100%;
+      // border: 2px solid white;
+      // background: rgba(#000, 0.5);
+      // backdrop-filter: blur(8px);
+      padding: 2em;
+    }
+
+    em {
+      color: #FFC800;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+
+    h1, p {
+      filter: drop-shadow(0 0 2px #fff);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+</style>
