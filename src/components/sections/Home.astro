@@ -2,7 +2,7 @@
 import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 ---
 
-<section>
+<section class="bg-scroll-anchor">
   <div class="unmasked">
     <div class="fg">
       <div class="main-container">
@@ -275,11 +275,11 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 </style>
 
 <script>
-  import { animateText } from "../../scripts/text-anim";
+  import { animateTyping } from "../../scripts/text-anim";
 
   const targets = document.querySelectorAll(".anim-text") as NodeListOf<HTMLElement>;
   for (const element of targets) {
-    animateText(element, 3, 16);
+    animateTyping(element, 3, 16);
   }
 
   for (const link of document.querySelectorAll<HTMLElement>("[data-goto]")) {
@@ -292,6 +292,5 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 
       anchor.scrollIntoView({ behavior: "smooth" });
     });
-
   }
 </script>
