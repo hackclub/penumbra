@@ -25,9 +25,10 @@ const float PULSE_INTENSITY = 0.03; // Intensity of pulsing animation
 const float PULSE_WIDTH = 60.0; // Pulse width in pixels (times tau)
 const float PULSE_RATE = 20.0; // Pulse animation speed
 
+uniform float iScrollProgress;
+
 void mainImage(out vec4 out_fragColor, in vec2 fragCoord) {
-    //float t = min(1.00, iTime / 10.0);
-    float t = 0.00;
+    float t = min(1.00, iScrollProgress);
 
     float maskIntensity = mix(0.0, MASK_INTENSITY, t);
     float maskBorder = mix(0.0, MASK_BORDER, t);

@@ -84,7 +84,11 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
   }
 
   :root {
-    --font-size-base: 2em;
+    --font-size-base: 2.5em;
+
+    @media screen and (max-width: 1700px) {
+      --font-size-base: 2em;
+    }
 
     @media screen and (max-width: 1360px) {
       --font-size-base: 1.75em; 
@@ -187,7 +191,7 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       > .left {
         align-items: flex-end;
         padding-bottom: 1em;
-        padding-left: .5em;
+        padding-left: 2vw;
         mix-blend-mode: difference;
       }
 
@@ -204,10 +208,10 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       > .left {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 8px;
         padding: 2.75em 4em;
         filter: $text-glow-black;
-        letter-spacing: -7%;
 
         h1 {
           font-family: Kleemax, monospace; 

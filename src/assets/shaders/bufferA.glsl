@@ -19,7 +19,8 @@ const float CAMERA_FOV = 0.3;
 const vec3  LIGHT_POS  = vec3(-2.0, 2.0, -1.0);
 
 const float DEG2RAD     = PI / 180.0;
-const float ANIM_SPEED  = 1.0;
+const float MAX_ANIM_SPEED  = 1.0;
+const float MIN_ANIM_SPEED  = 0.1;
 
 /*----------------------------*\
 |  > Custom uniforms           |
@@ -99,6 +100,7 @@ float sdScene(vec3 p) {
     //float t = iTime / 10.0;
     // -iMouse.z / 640.0
     float t = iScrollProgress;
+    float animSpeed = mix(MAX_ANIM_SPEED, MIN_ANIM_SPEED, clamp01(t)); 
 
     vec2 normMouse = iMouse.xy / iResolution.xy;
     float mouseDivisor = 12.0 + (t * 10000.0);
@@ -116,7 +118,7 @@ float sdScene(vec3 p) {
     );
     
     torusPos = rotateX(torusPos, DEG2RAD * 20.0);
-    torusPos = rotateZ(torusPos, DEG2RAD * (-25.0 + (iTime * ANIM_SPEED)));
+    torusPos = rotateZ(torusPos, DEG2RAD * (-25.0 + (iTime * animSpeed)));
     torusPos = transformTwist(torusPos, 1.00 + (87.0 / 15.0));
     
     float torusDist = sdTorus(torusPos, vec2(2.5, 1.0));

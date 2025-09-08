@@ -51,12 +51,14 @@ const uniformsA = {
 const uniformsB = {
     iResolution: { value: new THREE.Vector3() },
     iChannel0: { value: null as unknown as THREE.Texture },
-    iTime: { value: 0 }
+    iTime: { value: 0 },
+    iScrollProgress: { value: 0 }
 };
 
 const uniformsImage = {
     iResolution: { value: new THREE.Vector3() },
     iChannel0: { value: null as unknown as THREE.Texture },
+    iScrollProgress: { value: 0 }
 };
 
 const matA = new THREE.ShaderMaterial({
@@ -143,6 +145,7 @@ function onResize() {
 const scrollAnchors = document.querySelectorAll<HTMLElement>(".bg-scroll-anchor");
 
 let scrollAnchorPositions: number[] | null = null;
+let smoothedScrollProgress = 0;
 
 function render(timeSecs: number) {
     const timeMs = timeSecs * 0.001;
@@ -164,7 +167,7 @@ function render(timeSecs: number) {
     for (let i = 0; i < scrollAnchors.length - 1; i++) {
         const a = scrollAnchorPositions[i];
         const b = scrollAnchorPositions[i + 1];
-        
+
         if (!(window.scrollY >= a && window.scrollY <= b))
             continue;
 
@@ -179,8 +182,13 @@ function render(timeSecs: number) {
         console.error(`No scroll anchors found for y=${window.scrollY}.`, scrollAnchors, scrollAnchorPositions);
         t = scrollAnchors.length;
     }
+    else {
+        smoothedScrollProgress = lerp(smoothedScrollProgress, t, 0.05);
+    }
 
-    uniformsA.iScrollProgress.value = t;
+    uniformsA.iScrollProgress.value = smoothedScrollProgress;
+    uniformsB.iScrollProgress.value = smoothedScrollProgress;
+    uniformsImage.iScrollProgress.value = smoothedScrollProgress;
     
     lerpedMouseX = lerp(lerpedMouseX, actualMouseX, MOUSE_REACTIVITY);
     lerpedMouseY = lerp(lerpedMouseY, actualMouseY, MOUSE_REACTIVITY);

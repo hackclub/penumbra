@@ -18,9 +18,11 @@ const float BLOOM_SAMPLES = 32.0; // Bloom texture samples
 const float BLOOM_BASE    = 0.50; // Bloom base brightness
 const float BLOOM_GLOW    = 3.00; // Bloom glow brightness
 
+uniform float iScrollProgress;
+
 void mainImage(out vec4 out_fragColor, in vec2 fragCoord) {
     //float t = min(1.00, iTime / 10.0);
-    float t = 0.00;
+    float t = min(1.00, iScrollProgress);
  
     float bloomBase = mix(1.00, BLOOM_BASE, t);
     float bloomGlow = mix(0.00, BLOOM_GLOW, t);

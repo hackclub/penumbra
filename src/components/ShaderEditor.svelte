@@ -110,11 +110,6 @@
           { tag: tags.keyword, class: "code-tag-keyword" },
           { tag: tags.typeName, class: "code-tag-keyword" }
         ])),
-        // EditorView.theme({
-        //   "&": {
-        //     fontSize: "1.25em"
-        //   }
-        // }),
         EditorView.updateListener.of(ev => {
           if (!ev.docChanged)
             return;
@@ -187,7 +182,7 @@
           .code-tag-comment { color: #A4A4A4; }
           .code-tag-keyword { color: #FFA352; }
         }
-    }
+      }
     }
 
     > .preview {
