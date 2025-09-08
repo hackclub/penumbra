@@ -36,21 +36,21 @@ import dedent from "dedent";
     You're given UV coordinates: they range from 0.0 to 1.0. (0.0, 0.0) is the bottom-right corner,
     and (1.0, 1.0) is the top-left one. The center of the screen is at (0.5, 0.5).
   </p>
-<!-- 
+
   <ShaderEditor client:load initialCode={dedent`
     vec3 fn(vec2 coord) {
         // Distance from the center - (0.5, 0.5). Try changing that vector!
         float d = distance(vec2(0.5, 0.5), coord);
         return vec3(d);
     }
-  `}/> -->
+  `}/>
 
   <p>
     There are multiple approaches to making art with shaders! Because what you're writing is just
     a function, try using random math formulas, and see what happens!
   </p>
 
-  <!-- <ShaderEditor client:load initialCode={dedent`
+  <ShaderEditor client:load initialCode={dedent`
     vec3 fn(vec2 coord) {
         // Random fun with trig functions! Mess around with it!
         float x = coord.x, y = coord.y;
@@ -61,7 +61,7 @@ import dedent from "dedent";
             0.5 + 0.5 * sin(v + 4.0)
         );
     }
-  `}/> -->
+  `}/>
 
   <p class="bg-scroll-anchor">
     If you want to do 3D, you are probably searching for <em>raymarching</em>. The shader in this very
