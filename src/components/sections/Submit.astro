@@ -9,60 +9,6 @@ import dedent from "dedent";
 <DocumentSection id="submit">
   <h1>submit.</h1>
   <p>
-    Penumbra is a Hack Club <Jargon client:idle description="You Ship, We Ship">YSWS</Jargon> program, where
-    you ship art made with shaders, and we ship you posters of that art, free of charge! We're also giving
-    out RTX and RX GPUs for the most dedicated.
-
-    <br><br>
-
-    But first - let's explain what actually *is* a shader.
-    For each pixel coordinate, a “fragment” shader will return its color!
-  </p>
-
-  <ShaderEditor client:load initialCode={dedent`
-    // Input: coordinate, output: RGB color
-    vec3 fn(vec2 coord) {
-        // As we go further to the right, increase the red value. 
-        return vec3(coord.x, 0, 0);
-    }
-  `}/>
-
-  <p>
-    Try messing around with the sandbox above! This language is called
-    <Jargon client:idle description="OpenGL Shading Language">GLSL</Jargon>. You're given
-    UV coordinates: they range from 0.0 to 1.0. (0.0, 0.0) is the bottom-right corner, and (1.0, 1.0)
-    is the top-left one. The center of the screen is at (0.5, 0.5).
-  </p>
-
-  <ShaderEditor client:load initialCode={dedent`
-    vec3 fn(vec2 coord) {
-        // Distance from the center
-        float d = distance(vec2(0.5, 0.5), coord);
-        return vec3(d);
-    }
-  `}/>
-
-  <p>
-    There are multiple approaches to making art with shaders! Because what you're writing is just
-    a function, try using random math formulas, and see what happens!
-  </p>
-
-  <ShaderEditor client:load initialCode={dedent`
-    vec3 fn(vec2 coord) {
-        // Random fun with trig functions! Mess around with it!
-        float x = coord.x, y = coord.y;
-        float v = 15.0 * sin((x * x - y * y) * 10.0);
-        return vec3(
-            0.5 + 0.5 * sin(v),
-            0.0,
-            0.5 + 0.5 * sin(v + 4.0)
-        );
-    }
-  `}/>
-
-  <p>
-    If you want to do 3D, you are probably searching for <em>raymarching</em>. The shader in this very
-    website was created with that technique! And, as you can see in the background - it all started
-    with a torus! :3
+    Fillout link here!
   </p>
 </DocumentSection>
