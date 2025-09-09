@@ -295,6 +295,7 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       }
 
       anchor.scrollIntoView({ behavior: "smooth" });
+      history.pushState(null, "", `#${link.dataset.goto}`);
     });
   }
 </script>
