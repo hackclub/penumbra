@@ -19,11 +19,11 @@ interface Props {
       if (!entries[0].isIntersecting === true)
         return;
 
-      for (const element of section.querySelectorAll("h1")) {
+      for (const element of section.querySelectorAll<HTMLHeadingElement>("*:not(.no-anim) > h1:not(.no-anim)")) {
         animateTyping(element, 3, 12);
       }
 
-      for (const element of section.querySelectorAll("p")) {
+      for (const element of section.querySelectorAll<HTMLParagraphElement>("*:not(.no-anim) > p:not(.no-anim)")) {
         animateObfuscation(element, 8, 0.25);
       }
     }, { threshold: [0.1] });
@@ -72,7 +72,7 @@ interface Props {
       }
     }
 
-    h1, p {
+    h1, h2, h3, p, details > summary, .glow {
       filter: drop-shadow(0 0 2px #fff);
     }
 
