@@ -118,7 +118,7 @@ float sdScene(vec3 p) {
     );
     
     torusPos = rotateX(torusPos, DEG2RAD * 20.0);
-    torusPos = rotateZ(torusPos, DEG2RAD * (-25.0 + (iTime * animSpeed)));
+    torusPos = rotateZ(torusPos, DEG2RAD * mod( (-25.0 + (iTime * animSpeed)), 360.0 ));
     torusPos = transformTwist(torusPos, 1.00 + (87.0 / 15.0));
     
     float torusDist = sdTorus(torusPos, vec2(2.5, 1.0));
