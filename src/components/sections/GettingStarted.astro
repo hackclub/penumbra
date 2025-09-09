@@ -2,19 +2,86 @@
 import DocumentSection from "../DocumentSection.astro";
 import ShaderEditor from "../ShaderEditor.svelte";
 import Jargon from "../Jargon.svelte";
+import BrowserDependent from "../BrowserDependent.svelte";
+
+import imgStep1 from "../../assets/img/step-1.svg";
+import imgStep2 from "../../assets/img/step-2.svg";
+import imgStep3 from "../../assets/img/step-3.svg";
+import imgStep4 from "../../assets/img/step-4.svg";
+
+import imgSlackDots from "../../assets/img/dots-slack.svg";
+import imgHourglassDots from "../../assets/img/dots-hourglass.svg";
+import imgChromeDots from "../../assets/img/dots-chrome.svg";
+import imgFirefoxDots from "../../assets/img/dots-firefox.svg";
+import imgHeartDots from "../../assets/img/dots-heart.svg";
 
 import dedent from "dedent";
+import { Image } from "astro:assets";
 ---
 
 <DocumentSection id="getting-started">
   <h1>getting started.</h1>
   <p>
-    Penumbra is a Hack Club <Jargon client:load description="You Ship, We Ship">YSWS</Jargon> program, where
-    you ship art made with shaders, and we ship you posters of that art, free of charge! We're also giving
-    away RTX and RX GPUs for the most dedicated.
+    Penumbra is a Hack Club YSWS (You Ship, We Ship) program, where you ship art made with shaders, and we ship you
+    posters of that art, free of charge! We're also giving away RTX and RX GPUs for the most dedicated.
+  </p>
 
-    <br class="bg-scroll-anchor"><br>
+  <div class="steps">
+    <div>
+      <Image src={imgStep1} alt="Orpheus waving" aria-hidden />
+      <div class="caption"><span>Join the Slack and setup Hackatime</span></div>
+    </div>
 
+    <div>
+      <Image src={imgStep2} alt="Orpheus coding" aria-hidden />
+      <div class="caption"><span>Create shaders with ShaderToy</span></div>
+    </div>
+
+    <div>
+      <Image src={imgStep3} alt="Orpheus holding a poster" aria-hidden />
+      <div class="caption"><span>Submit them and get posters</span></div>
+    </div>
+
+    <div>
+      <Image src={imgStep4} alt="A graphics card" aria-hidden />
+      <div class="caption"><span>40 hrs of work = GPU!</span></div>
+    </div>
+  </div>
+
+  <p>
+    To get started, join our Slack and set up Hackatime! We use Slack as our primary communication
+    platform. Hackatime is our custom WakaTime server to track your coding time. You can use it with
+    the WakaTime for ShaderToy browser extension!
+  </p>
+
+  <div class="steps smaller">
+    <a href="https://hackclub.com/slack" target="_blank">
+      <Image src={imgSlackDots} alt="Slack icon" aria-hidden />
+      <div class="caption"><span>Join the Slack</span></div>
+    </a>
+
+    <a href="https://hackatime.hackclub.com" target="_blank">
+      <Image src={imgHourglassDots} alt="Hourglass icon" aria-hidden />
+      <div class="caption"><span>Set-up WakaTime with Hackatime</span></div>
+    </a>
+
+    <a class="only-chrome" href="https://chromewebstore.google.com/detail/wakatime-for-shadertoy/akgicdopjilmbjmdmdjdfikoocibfdpn" target="_blank">
+      <Image src={imgChromeDots} alt="Chrome icon" aria-hidden />
+      <div class="caption"><span>Install the Chrome extension</span></div>
+    </a>
+
+    <a class="only-firefox" href="https://addons.mozilla.org/en-US/firefox/addon/wakatime-for-shadertoy" target="_blank">
+      <Image src={imgFirefoxDots} alt="Firefox icon" aria-hidden />
+      <div class="caption"><span>Install the Firefox extension</span></div>
+    </a>
+
+    <a href="https://shadertoy.com/new" target="_blank">
+      <Image src={imgHeartDots} alt="A heart" aria-hidden />
+      <div class="caption"><span>Have fun on ShaderToy!</span></div>
+    </a>
+  </div>
+
+  <p class="bg-scroll-anchor">
     But first - let's explain what actually *is* a shader.
     For each pixel coordinate, a “fragment” shader will return its color!
   </p>
@@ -28,8 +95,7 @@ import dedent from "dedent";
   `}/>
 
   <p>
-    This language is called <Jargon client:load description="OpenGL Shading Language">GLSL</Jargon>.
-    Try messing around with the sandbox above!
+    This language is called GLSL - the OpenGL Shading Language. Try messing around with the sandbox above!
     
     <br><br>
 
@@ -64,19 +130,65 @@ import dedent from "dedent";
   `}/>
 
   <p class="bg-scroll-anchor">
-    If you want to do 3D, you are probably searching for <em>raymarching</em>. The shader in this very
-    website was created with that technique!
-  </p>
-
-  <p class="bg-scroll-anchor">
-    You'll have to track your coding time using <a href="https://hackatime.hackclub.com/" target="_blank">Hackatime</a>.
-    You can either track your time from your favorite IDE or via the <a href="https://chromewebstore.google.com/">Chrome</a>
-    or <a href="">Firefox</a> WakaTime for ShaderToy extensions.
-  </p>
-
-  <p class="bg-scroll-anchor">
-    You'll be publishing your shaders on <a href="https://shadertoy.com/new" target="_blank"><em>ShaderToy</em></a>.
-    It's both a community and a sandbox for you to mess around with! It has plenty of examples and inspiration
-    for you to look at.
+    If you want to do 3D, you are probably searching for <em>raymarching</em>. You can learn more about it
+    with the guides in the next section!
   </p>
 </DocumentSection>
+
+<style lang="scss">
+  .shadertoy-embed {
+    width: 100%;
+  }
+
+  .steps {
+    &.smaller {
+      img {
+        height: 6em;
+      }
+    }
+
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 3em 0;
+
+    > a {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      filter: drop-shadow(0 0 4px #fff);
+    }
+
+    div, > a {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      width: 25%;
+
+      .caption {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        span {
+          width: 75%;
+          text-align: center;
+          filter: drop-shadow(0 0 4px #fff);
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  if (navigator.userAgent.includes("Chrome/")) {
+    document.querySelectorAll(".only-firefox").forEach(x => x.remove());
+  }
+  else {
+    document.querySelectorAll(".only-chrome").forEach(x => x.remove());
+  }
+</script>

@@ -1,64 +1,123 @@
 ---
 import DocumentSection from "../DocumentSection.astro";
-import ShaderEditor from "../ShaderEditor.svelte";
-import Jargon from "../Jargon.svelte";
 
-import dedent from "dedent";
+import ImgKishimisuArtCoding from "../../assets/img/kishimisu-art-coding.jpg";
+import ImgKishimisuRaymarching from "../../assets/img/kishimisu-raymarching.jpg";
+import { Image } from "astro:assets";
 ---
 
 <DocumentSection id="resources-and-guides">
   <h1>resources & guides.</h1>
-  <p>
-    Penumbra is a Hack Club <Jargon client:idle description="You Ship, We Ship">YSWS</Jargon> program, where
-    you ship art made with shaders, and we ship you posters of that art, free of charge! We're also giving
-    out RTX and RX GPUs for the most dedicated.
-
-    <br><br>
-
-    But first - let's explain what actually *is* a shader.
-    For each pixel coordinate, a “fragment” shader will return its color!
+  <p class="no-anim">
+    If you ever are stuck, don't be afraid to ask in the <a class="fat" href="https://hackclub.slack.com/archives/C09EC7ZS05S" target="_blank">#penumbra</a>
+    Slack channel. For inspiration, take a look at <a href="https://www.shadertoy.com/results?sort=newest" target="_blank"><em>ShaderToy's Browse</em></a>
+    tab! It's full of fancy shaders, all with code!
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
-    // Input: coordinate, output: RGB color
-    vec3 fn(vec2 coord) {
-        // As we go further to the right, increase the red value. 
-        return vec3(coord.x, 0, 0);
-    }
-  `}/>
-
   <p>
-    Try messing around with the sandbox above! This language is called
-    <Jargon client:idle description="OpenGL Shading Language">GLSL</Jargon>. You're given
-    UV coordinates: they range from 0.0 to 1.0. (0.0, 0.0) is the bottom-right corner, and (1.0, 1.0)
-    is the top-left one. The center of the screen is at (0.5, 0.5).
+    If you're just starting out, or need a refresher, watch kishimisu's fantastic introduction
+    to the world of making art with shaders! 
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
-    vec3 fn(vec2 coord) {
-        // Distance from the center
-        float d = distance(vec2(0.5, 0.5), coord);
-        return vec3(d);
-    }
-  `}/>
+  <ul class="card-list">
+    <li>
+      <a href="https://www.youtube.com/watch?v=f4s1h2YETNY" target="_blank">
+        <div class="card">
+          <div class="thumbnail">
+            <Image src={ImgKishimisuArtCoding} aria-hidden alt="Thumbnail" />
+          </div>
+
+          <div class="content no-anim">
+            <h3>An introduction to Shader Art Coding</h3>
+            <p>The basics of how GLSL and shaders work, and how to make art with them</p>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.youtube.com/watch?v=khblXafu7iA" target="_blank">
+        <div class="card">
+          <div class="thumbnail">
+            <Image src={ImgKishimisuRaymarching} aria-hidden alt="Thumbnail" />
+          </div>
+
+          <div class="content no-anim">
+            <h3>An introduction to Raymarching</h3>
+            <p>Explains how to render 3D objects via ShaderToy.</p>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
 
   <p>
-    There are multiple approaches to making art with shaders! Because what you're writing is just
-    a function, try using random math formulas, and see what happens!
+    If you're interested in 3D raymarching, you might be interested in these:
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
-    vec3 fn(vec2 coord) {
-        // Random fun with trig functions! Mess around with it!
-        float x = coord.x, y = coord.y;
-        float v = 15.0 * sin((x * x - y * y) * 10.0);
-        return vec3(
-            0.5 + 0.5 * sin(v),
-            0.0,
-            0.5 + 0.5 * sin(v + 4.0)
-        );
-    }
-  `}/>
-
-
+  <ul class="bullet-list">
+    <li><a href="https://www.shadertoy.com/view/wclyzf" target="_blank"><em>ShaderToy raymarching template</em></a></li>
+    <li><a href="https://iquilezles.org/articles/distfunctions/" target="_blank"><em>Inigo Quilez's SDFs (3D shapes) for raymarching</em></a></li>
+  </ul>
 </DocumentSection>
+
+<style lang="scss">
+  a {
+    color: white;
+
+    &.fat {
+      color: black;
+      background: white;
+      padding: 0 2px;
+    }
+  }
+
+  .resources-directory {
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+  }
+  
+  .card-list {
+    list-style-type: none;
+
+    li:not(:last-child) {
+      margin-bottom: 1em;
+    }
+  }
+
+  details {
+    summary {
+      cursor: pointer;
+    }
+
+    ul {
+      margin-top: .25em;
+    }
+  }
+
+  .card {
+    display: flex;
+    gap: 1em;
+    padding: .5em;
+    
+    h3, p {
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 1.25em;
+    }
+
+    .thumbnail {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: min-content;
+        height: 3em;
+        object-fit: contain;
+      }
+    }
+  }
+</style>
