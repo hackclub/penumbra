@@ -172,7 +172,7 @@ function render(timeMs: number) {
     if (scrollAnchorPositions == null) {
         scrollAnchorPositions = [...scrollAnchors].map(x => x.getBoundingClientRect().top);
         scrollAnchorPositions[0] = 0;
-        scrollAnchorPositions[scrollAnchors.length - 1] = (document.documentElement.scrollHeight - window.innerHeight);
+        scrollAnchorPositions[scrollAnchors.length - 1] = (document.documentElement.scrollHeight);
     }
 
     for (let i = 0; i < scrollAnchors.length - 1; i++) {
