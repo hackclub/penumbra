@@ -35,7 +35,10 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 
         <div class="bottom">
           <div class="left">
-            <Fragment set:html={hackClubFlag} />
+            <a class="hc-flag" href="https://hackclub.com">
+              <Fragment set:html={hackClubFlag} />
+            </a>
+
             <h1>PENUMBRA</h1>
           </div>
 
@@ -149,6 +152,17 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
   .masked > .fg > .main-container {
     background: url("/public/vectors/home-container.svg");
     background-size: contain;
+  }
+
+  .hc-flag {
+    display: inline-block;
+    max-width: fit-content;
+    transition: transform .25s;
+    transform-origin: center;
+    transform: scale(1.00);
+
+    &:hover { transform: scale(1.1); }
+    &:active { transform: scale(0.9); }
   }
 
   .main-container {
