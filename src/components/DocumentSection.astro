@@ -38,6 +38,7 @@ interface Props {
     font-size: 1.5em;
     padding: 2em;
     padding-top: 1em;
+    padding-bottom: 0;
 
     $bg-transition-length: 20%;
     $bg-transition-alpha: 0.5;
@@ -78,6 +79,14 @@ interface Props {
 
     a {
       text-decoration: none;
+    }
+
+    a.btn {
+      display: block;
+      width: fit-content;
+      color: #000;
+      background-color: #fff;
+      padding: .5em 2em;
     }
   }
 </style>
