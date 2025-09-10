@@ -26,7 +26,7 @@ import { Image } from "astro:assets";
     posters of that art, free of charge! We're also giving away RTX and RX GPUs for the most dedicated.
   </p>
 
-  <div class="steps">
+  <div class="steps bg-scroll-anchor">
     <div>
       <Image src={imgStep1} alt="Orpheus waving" aria-hidden />
       <div class="caption"><span>Join the Slack and setup Hackatime</span></div>
@@ -44,9 +44,15 @@ import { Image } from "astro:assets";
 
     <div>
       <Image src={imgStep4} alt="A graphics card" aria-hidden />
-      <div class="caption"><span>40 hrs of work = GPU!</span></div>
+      <div class="caption"><span>45 hrs of work = GPU!</span></div>
     </div>
   </div>
+
+  <p class="no-anim">
+    We will use a local poster printing service in your country in order to ship your poster.
+    In order to get a GPU, you'll need to spend at least <em>45 hours</em> across <em>multiple shaders</em>.
+    We'll let you know how close you are to that goal on <em>Slack</em>!
+  </p>
 
   <p>
     To get started, join our Slack and set up Hackatime! We use Slack as our primary communication
