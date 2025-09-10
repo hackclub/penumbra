@@ -28,22 +28,30 @@ import { Image } from "astro:assets";
 
   <div class="steps bg-scroll-anchor">
     <div>
-      <Image src={imgStep1} alt="Orpheus waving" aria-hidden />
+      <div class="img">
+        <Image src={imgStep1} alt="Orpheus waving" aria-hidden />
+      </div>
       <div class="caption"><span>Join the Slack and setup Hackatime</span></div>
     </div>
 
     <div>
-      <Image src={imgStep2} alt="Orpheus coding" aria-hidden />
+      <div class="img">
+        <Image src={imgStep2} alt="Orpheus coding" aria-hidden />
+      </div>
       <div class="caption"><span>Create shaders with ShaderToy</span></div>
     </div>
 
     <div>
-      <Image src={imgStep3} alt="Orpheus holding a poster" aria-hidden />
+      <div class="img">
+        <Image src={imgStep3} alt="Orpheus holding a poster" aria-hidden />
+      </div>
       <div class="caption"><span>Submit them and get posters</span></div>
     </div>
 
     <div>
-      <Image src={imgStep4} alt="A graphics card" aria-hidden />
+      <div class="img">
+        <Image src={imgStep4} alt="A graphics card" aria-hidden />
+      </div>
       <div class="caption"><span>45 hrs of work = GPU!</span></div>
     </div>
   </div>
@@ -62,27 +70,37 @@ import { Image } from "astro:assets";
 
   <div class="steps smaller hoverable">
     <a href="https://slack-gateway.hackclub.com/invite?ysws=penumbra" target="_blank">
-      <Image src={imgSlackDots} alt="Slack icon" aria-hidden />
+      <div class="img">
+        <Image src={imgSlackDots} alt="Slack icon" aria-hidden />
+      </div>
       <div class="caption"><span>Join the Slack</span></div>
     </a>
 
     <a href="https://hackatime.hackclub.com" target="_blank">
-      <Image src={imgHourglassDots} alt="Hourglass icon" aria-hidden />
+      <div class="img">
+        <Image src={imgHourglassDots} alt="Hourglass icon" aria-hidden />
+      </div>
       <div class="caption"><span>Set-up WakaTime with Hackatime</span></div>
     </a>
 
     <a class="only-chrome" href="https://chromewebstore.google.com/detail/wakatime-for-shadertoy/akgicdopjilmbjmdmdjdfikoocibfdpn" target="_blank">
-      <Image src={imgChromeDots} alt="Chrome icon" aria-hidden />
+      <div class="img">
+        <Image src={imgChromeDots} alt="Chrome icon" aria-hidden />
+      </div>
       <div class="caption"><span>Install the Chrome extension</span></div>
     </a>
 
     <a class="only-firefox" href="https://addons.mozilla.org/en-US/firefox/addon/wakatime-for-shadertoy" target="_blank">
-      <Image src={imgFirefoxDots} alt="Firefox icon" aria-hidden />
+      <div class="img">
+        <Image src={imgFirefoxDots} alt="Firefox icon" aria-hidden />
+      </div>
       <div class="caption"><span>Install the Firefox extension</span></div>
     </a>
 
     <a href="https://shadertoy.com/new" target="_blank">
-      <Image src={imgHeartDots} alt="A heart" aria-hidden />
+      <div class="img">
+        <Image src={imgHeartDots} alt="A heart" aria-hidden />
+      </div>
       <div class="caption"><span>Have fun on ShaderToy!</span></div>
     </a>
   </div>
@@ -191,9 +209,17 @@ import { Image } from "astro:assets";
       text-decoration: none;
     }
 
-    img {
+    .img {
       width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
       filter: drop-shadow(0 0 4px #fff);
+
+      > img {
+        width: 80%;
+        aspect-ratio: 1 / 1;
+      }
     }
 
     div, > a {
