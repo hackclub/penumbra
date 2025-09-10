@@ -140,6 +140,10 @@
     flex-direction: row;
     gap: 1em;
 
+    @media screen and (max-width: 1200px) {
+      flex-direction: column;
+    }
+
     > .editor-container {
       width: 100%;
 
@@ -188,6 +192,10 @@
     > .preview {
       border: 1px solid white;
       background: black;
+
+      @media screen and (max-width: 1200px) {
+        height: 7em;
+      }
     }
   }
 </style>

@@ -58,6 +58,14 @@ interface Props {
       // background: rgba(#000, 0.5);
       // backdrop-filter: blur(8px);
       padding: 2em;
+
+      @media screen and (max-width: 800px) {
+        padding: 1em;
+      }
+
+      @media screen and (max-width: 400px) {
+        padding: .5em;
+      }
     }
 
     em {

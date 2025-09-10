@@ -167,6 +167,18 @@ import { Image } from "astro:assets";
     justify-content: space-around;
     margin: 3em 0;
 
+    @media screen and (max-width: 730px) {
+      flex-direction: column;
+      margin: 1em 0;
+      align-items: center;
+      gap: 2em;
+
+      div img {
+        width: 7em;
+        height: min-content;
+      }
+    }
+
     > a {
       color: #fff;
       display: block;
@@ -183,6 +195,11 @@ import { Image } from "astro:assets";
       flex-direction: column;
       gap: 1em;
       width: 25%;
+
+      @media screen and (max-width: 730px) {
+        width: 100%;
+        align-items: center;
+      }
 
       .caption {
         width: 100%;

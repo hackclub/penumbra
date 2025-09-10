@@ -80,29 +80,33 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 <style lang="scss"> 
   $text-glow-black: drop-shadow(0 0 21px rgba(0, 0, 0, 0.25));
 
-  @mixin screen-md() {
-    @media screen and (max-width: 1360px) {
-      @content;
-    }
-  }
-
   :root {
     --font-size-base: 2.5em;
+    --font-size-logo: 2.75em;
 
     @media screen and (max-width: 1700px) {
       --font-size-base: 2em;
+      --font-size-logo: 2.25em;
     }
 
     @media screen and (max-width: 1360px) {
       --font-size-base: 1.75em; 
+      --font-size-logo: 2.00em;
     }
 
     @media screen and (max-width: 1190px) {
       --font-size-base: 1.5em;
+      --font-size-logo: 1.75em;
     }
 
     @media screen and (max-width: 1020px) {
       --font-size-base: 1.25em;
+      --font-size-logo: 1.50em;
+    }
+    
+    @media screen and (max-width: 880px) {
+      --font-size-base: 1.5em;
+      --font-size-logo: 1.75em;
     }
   }
 
@@ -155,11 +159,16 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
   }
 
   .hc-flag {
-    display: inline-block;
+    display: inline-flex;
     max-width: fit-content;
     transition: transform .25s;
     transform-origin: center;
     transform: scale(1.00);
+
+    > :global(svg) {
+      width: min-content;
+      height: calc(var(--font-size-logo) * 1.1);
+    }
 
     &:hover { transform: scale(1.1); }
     &:active { transform: scale(0.9); }
@@ -229,7 +238,7 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 
         h1 {
           font-family: Kleemax, monospace; 
-          font-size: 2.75em;
+          font-size: var(--font-size-logo);
           margin: 0;
           color: #000;
         }
@@ -289,6 +298,70 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
     pointer-events: none;
     color: rgba($text-color, 0.25);
     filter: drop-shadow(0 0 5px rgba($text-color, 0.25));
+  }
+
+  @media screen and (max-width: 880px) {
+    section {
+      mix-blend-mode: normal;
+    }
+
+    .fg {
+      padding: 2em 0;
+    }
+
+    .unmasked > .fg > .main-container {
+      height: 100vh;
+
+      .top {
+        padding: 0 0.5em;
+
+        .left {
+          text-align: right;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .masked > .fg > .main-container {
+      background: transparent;
+      width: 100%;
+      height: 100%;
+
+      h1, nav {
+        color: #fff !important;
+      }
+
+      .hc-flag {
+        filter: invert(1);
+      }
+
+      .bottom {
+        flex-direction: column;
+
+        .left {
+          padding: 0 3em;
+        }
+
+        .right {
+          padding-top: 0;
+        }
+
+        .right {
+          justify-content: flex-start;
+          padding: .5em;
+          padding-top: 0em;
+
+          ul li {
+            justify-content: flex-start;
+            padding: 0;
+
+            &::after {
+              filter: invert(1);
+            }
+          }
+        }
+      }
+    }
   }
 </style>
 
