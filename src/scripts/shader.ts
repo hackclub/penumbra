@@ -89,10 +89,20 @@ uniformsImage.iChannel0.value = rtB.texture;
 let actualMouseX = 0, actualMouseY = 0;
 let lerpedMouseX = 0, lerpedMouseY = 0;
 
+let lastTime = 0, timeBasis = 0;
+
 window.addEventListener("pointermove", e => {
     const rect = canvas.getBoundingClientRect();
     actualMouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
     actualMouseY = (rect.bottom - e.clientY) * (canvas.height / rect.height);
+});
+
+window.addEventListener("blur", () => {
+    // The shader goes kinda crazy with large values of t, reset them when the user switches tabs
+    if (lastTime > timeBasis + 30) {
+        console.log(`Time basis fast-forwarded to ${lastTime}`);
+        timeBasis = lastTime;
+    }
 });
 
 function resizeRendererToDisplaySize(r: THREE.WebGLRenderer) {
@@ -147,14 +157,15 @@ const scrollAnchors = document.querySelectorAll<HTMLElement>(".bg-scroll-anchor"
 let scrollAnchorPositions: number[] | null = null;
 let smoothedScrollProgress = 0;
 
-function render(timeSecs: number) {
-    const timeMs = timeSecs * 0.001;
+function render(timeMs: number) {
+    lastTime = timeMs;
+    const timeSeconds = (timeMs - timeBasis) * 0.001
 
     onResize();
     updateResUniforms();
 
-    uniformsA.iTime.value = timeMs;
-    uniformsB.iTime.value = timeMs;
+    uniformsA.iTime.value = timeSeconds;
+    uniformsB.iTime.value = timeSeconds;
 
     let t = NaN;
 
