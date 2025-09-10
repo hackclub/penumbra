@@ -54,8 +54,8 @@ import { Image } from "astro:assets";
     the WakaTime for ShaderToy browser extension!
   </p>
 
-  <div class="steps smaller">
-    <a href="https://hackclub.com/slack" target="_blank">
+  <div class="steps smaller hoverable">
+    <a href="https://slack-gateway.hackclub.com/invite?ysws=penumbra" target="_blank">
       <Image src={imgSlackDots} alt="Slack icon" aria-hidden />
       <div class="caption"><span>Join the Slack</span></div>
     </a>
@@ -144,6 +144,21 @@ import { Image } from "astro:assets";
     &.smaller {
       img {
         height: 6em;
+      }
+    }
+
+    &.hoverable {
+      > * {
+        transition: transform .25s;
+        transform: scale(1.00);
+      }
+
+      > *:hover {
+        transform: scale(1.03);
+      }
+
+      > *:active {
+        transform: scale(0.98);
       }
     }
 
