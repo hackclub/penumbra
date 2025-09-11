@@ -9,7 +9,7 @@ import Submit from "../components/sections/Submit.astro";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content="Make a shader. We'll ship you the poster. Free GPUs for the most dedicated.">
@@ -71,6 +71,7 @@ import Submit from "../components/sections/Submit.astro";
 
   body {
     font-family: Nothing, monospace;
+    position: fixed;
 
     & > section {
       position: absolute;
@@ -79,6 +80,8 @@ import Submit from "../components/sections/Submit.astro";
 
     & > #shader {
       position: fixed;
+      width: 100vw;
+      height: 100vh;
     }
 
     & > section:nth-of-type(1) { top: 0vh; }
