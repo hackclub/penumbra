@@ -100,6 +100,16 @@ import { Image } from "astro:assets";
     display: flex;
     gap: 1em;
     padding: .5em;
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+      }
+    }
     
     h3, p {
       margin: 0;

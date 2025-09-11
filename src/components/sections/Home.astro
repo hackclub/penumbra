@@ -206,6 +206,10 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       font-size: var(--font-size-base);
       padding: 0 3em;
 
+      @media screen and (max-width: 700px) {
+        height: $top-height - 5%;
+      }
+
       > * {
         display: flex;
         color: white;
@@ -227,6 +231,10 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 
     > .bottom {
       height: 100% - $top-height;
+
+      @media screen and (max-width: 700px) {
+        height: auto;
+      }
 
       > .left {
         display: flex;
@@ -305,15 +313,18 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       mix-blend-mode: normal;
     }
 
-    .fg {
-      padding: 2em 0;
-    }
-
     .unmasked > .fg > .main-container {
       height: 100vh;
 
       .top {
         padding: 0 0.5em;
+        justify-content: flex-end;
+        gap: 2em;
+
+        > * {
+          width: auto;
+          height: auto;
+        }
 
         .left {
           text-align: right;
@@ -339,7 +350,7 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
         flex-direction: column;
 
         .left {
-          padding: 0 3em;
+          padding: 0 1.5em;
         }
 
         .right {
@@ -350,6 +361,10 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
           justify-content: flex-start;
           padding: .5em;
           padding-top: 0em;
+
+          ul {
+            padding-left: .5em;
+          }
 
           ul li {
             justify-content: flex-start;
