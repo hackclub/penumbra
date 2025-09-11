@@ -14,7 +14,6 @@
 //
 
 const float BLOOM_RADIUS  = 16.0; // Bloom radius in pixels
-const float BLOOM_SAMPLES = 32.0; // Bloom texture samples
 const float BLOOM_BASE    = 0.50; // Bloom base brightness
 const float BLOOM_GLOW    = 3.00; // Bloom glow brightness
 

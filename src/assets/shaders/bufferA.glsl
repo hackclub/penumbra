@@ -10,11 +10,6 @@
 |  > Constants           |
 \*----------------------*/
 
-const float RAYMARCH_MIN_DIST   = 0.3;
-const float RAYMARCH_MAX_DIST   = 50.0;
-const float RAYMARCH_HIT_CUTOFF = 0.001;
-const int   RAYMARCH_MAX_ITERS  = 32;
-
 const float CAMERA_FOV = 0.3;
 const vec3  LIGHT_POS  = vec3(-2.0, 2.0, -1.0);
 
