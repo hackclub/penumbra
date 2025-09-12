@@ -1,4 +1,5 @@
 ---
+import dedent from "dedent";
 import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 ---
 
@@ -53,25 +54,29 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
       </div>
     </div>
 
-    <pre class="bg" aria-hidden="true" is:raw>
-      const float RAYMARCH_MIN_DIST = 0.3;
-      const float RAYMARCH_MAX_DIST = 50.0;
-      const float RAYMARCH_HIT_CUTOFF = 0.001;
-      const int RAYMARCH_MAX_ITERS = 32;
-      const float CAMERA_FOV = 0.3;
-      const vec3 LIGHT_POS = vec3(-2.0, 2.0, -1.0);
-      const float PI = 3.14159265358979323846;
-      const float DEG2RAD = PI / 180.0;
-      const float ANIM_SPEED = 1.0;
-      float clamp01(float x) { return clamp(x, 0.0, 1.0); }
-      vec3 clamp01(vec3 x) { return clamp(x, 0.0, 1.0); }
-      vec3 rotateX(vec3 p, float a) {
-        float c = cos(a), s = sin(a);    
-        return vec3(p.x, c * p.y - s * p.z, s * p.y + c * p.z);    
-      }
-      vec3 rotateY(vec3 p, float a) {
-        float c = cos(a), s = sin(a);    
-        return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z);    
+    <pre class="bg" aria-hidden="true">
+      {
+        dedent`
+          const float RAYMARCH_MIN_DIST = 0.3;
+          const float RAYMARCH_MAX_DIST = 50.0;
+          const float RAYMARCH_HIT_CUTOFF = 0.001;
+          const int RAYMARCH_MAX_ITERS = 32;
+          const float CAMERA_FOV = 0.3;
+          const vec3 LIGHT_POS = vec3(-2.0, 2.0, -1.0);
+          const float PI = 3.14159265358979323846;
+          const float DEG2RAD = PI / 180.0;
+          const float ANIM_SPEED = 1.0;
+          float clamp01(float x) { return clamp(x, 0.0, 1.0); }
+          vec3 clamp01(vec3 x) { return clamp(x, 0.0, 1.0); }
+          vec3 rotateX(vec3 p, float a) {
+            float c = cos(a), s = sin(a);    
+            return vec3(p.x, c * p.y - s * p.z, s * p.y + c * p.z);    
+          }
+          vec3 rotateY(vec3 p, float a) {
+            float c = cos(a), s = sin(a);    
+            return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z);    
+          }
+        `
       }
     </pre>
   </div>
