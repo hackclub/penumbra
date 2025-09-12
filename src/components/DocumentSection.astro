@@ -81,13 +81,19 @@ interface Props {
       font-size: 2em;
       margin: 0;
 
-      &::before {
-        content: ">>> ";
-      }
+      &::before { content: ">>> "; }
     }
 
-    h1, h2, h3, p, details > summary, .glow {
-      filter: drop-shadow(0 0 2px #fff);
+    h2 {
+      margin: 0;
+
+      &::before { content: ">> "; }
+    }
+
+    h1, h2, h3, p, details > summary, li, .glow {
+      &:not(.no-glow) {
+        filter: drop-shadow(0 0 2px #fff);
+      }
     }
 
     a {
