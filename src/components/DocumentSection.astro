@@ -106,6 +106,14 @@ interface Props {
       color: #000;
       background-color: #fff;
       padding: .5em 2em;
+      filter: drop-shadow(0 0 8px #fff);
+      transition: all .1s;
+
+      &:hover {
+        color: #fff;
+        background-color: #000;
+        filter: drop-shadow(0 0 8px #000);
+      }
     }
   }
 </style>
