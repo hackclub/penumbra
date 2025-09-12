@@ -289,18 +289,19 @@ function render(timeMs: number) {
     if (scrollAnchorPositions == null) {
         scrollAnchorPositions = [...scrollAnchors].map(x => x.getBoundingClientRect().top);
         scrollAnchorPositions[0] = 0;
-        scrollAnchorPositions[scrollAnchors.length - 1] = (document.documentElement.scrollHeight);
+        scrollAnchorPositions[scrollAnchors.length - 1] = document.body.scrollHeight;
     }
 
     for (let i = 0; i < scrollAnchors.length - 1; i++) {
         const a = scrollAnchorPositions[i];
         const b = scrollAnchorPositions[i + 1];
+        const scrollY = document.body.scrollTop;
 
-        if (!(window.scrollY >= a && window.scrollY <= b))
+        if (!(scrollY >= a && scrollY <= b))
             continue;
 
         const height = b - a;
-        const scroll = window.scrollY - a;
+        const scroll = scrollY - a;
 
         t = (scroll / height) + i;
         break;
