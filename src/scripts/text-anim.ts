@@ -1,13 +1,20 @@
 import { rng, shuffle } from "./util";
 
+const animatedComponents = new Set<HTMLElement>();
+
 export function animateTyping(element: HTMLElement, transitionLength: number, frameLength: number) {
+    if (animatedComponents.has(element))
+        return;
+
     const endText = element.innerText;
     let frame = 0;
 
+    animatedComponents.add(element);
     const timer = setInterval(() => {
         const idx = Math.floor(frame / transitionLength);
         if (idx == endText.length) {
             element.innerText = endText;
+            animatedComponents.delete(element);
             clearInterval(timer);
             return;
         }
@@ -18,6 +25,11 @@ export function animateTyping(element: HTMLElement, transitionLength: number, fr
 }
 
 export function animateObfuscation(element: HTMLElement, frameLength: number, obfuscatedPercentage: number) {
+    if (animatedComponents.has(element))
+        return;
+
+    animatedComponents.add(element);
+    
     const endText = element.innerText;
 
     let obfuscatedIndices = [...Array(endText.length).keys()]
@@ -34,6 +46,7 @@ export function animateObfuscation(element: HTMLElement, frameLength: number, ob
         if (obfuscatedIndices.length == 0) {
             element.innerText = endText;
             clearInterval(timer);
+            animatedComponents.delete(element);
             return;
         }
 
