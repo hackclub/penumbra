@@ -110,7 +110,7 @@ import { Image } from "astro:assets";
     For each pixel coordinate, a “fragment” shader will return its color!
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
+  <ShaderEditor client:only="svelte" initialCode={dedent`
     // Input: coordinate, output: RGB color
     vec3 fn(vec2 coord) {
         // As we go further to the right, increase the red value. 
@@ -127,7 +127,7 @@ import { Image } from "astro:assets";
     and (1.0, 1.0) is the top-left one. The center of the screen is at (0.5, 0.5).
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
+  <ShaderEditor client:only="svelte" initialCode={dedent`
     vec3 fn(vec2 coord) {
         // Distance from the center - (0.5, 0.5). Try changing that vector!
         float d = distance(vec2(0.5, 0.5), coord);
@@ -140,7 +140,7 @@ import { Image } from "astro:assets";
     a function, try using random math formulas, and see what happens!
   </p>
 
-  <ShaderEditor client:load initialCode={dedent`
+  <ShaderEditor client:only="svelte" initialCode={dedent`
     vec3 fn(vec2 coord) {
         // Random fun with trig functions! Mess around with it!
         float x = coord.x, y = coord.y;
@@ -251,10 +251,13 @@ import { Image } from "astro:assets";
 </style>
 
 <script>
-  if (navigator.userAgent.includes("Chrome/")) {
-    document.querySelectorAll(".only-firefox").forEach(x => x.remove());
-  }
-  else {
-    document.querySelectorAll(".only-chrome").forEach(x => x.remove());
-  }
+  // Use requestAnimationFrame to ensure this runs after hydration
+  requestAnimationFrame(() => {
+    if (navigator.userAgent.includes("Chrome/")) {
+      document.querySelectorAll(".only-firefox").forEach(x => x.remove());
+    }
+    else {
+      document.querySelectorAll(".only-chrome").forEach(x => x.remove());
+    }
+  });
 </script>

@@ -383,21 +383,24 @@ import hackClubFlag from "../../assets/hackclub-flag.svg?raw";
 <script>
   import { animateTyping } from "../../scripts/text-anim";
 
-  const targets = document.querySelectorAll(".anim-text") as NodeListOf<HTMLElement>;
-  for (const element of targets) {
-    animateTyping(element, 3, 16);
-  }
+  // Use requestAnimationFrame to ensure this runs after hydration
+  requestAnimationFrame(() => {
+    const targets = document.querySelectorAll(".anim-text") as NodeListOf<HTMLElement>;
+    for (const element of targets) {
+      animateTyping(element, 3, 16);
+    }
 
-  for (const link of document.querySelectorAll<HTMLElement>("[data-goto]")) {
-    link.addEventListener("click", () => {
-      const anchor = document.getElementById(link.dataset.goto!);
-      if (!anchor) {
-        console.error(`No anchor element with ID ${link.dataset.goto} was found. Originating element:`, link);
-        return;
-      }
+    for (const link of document.querySelectorAll<HTMLElement>("[data-goto]")) {
+      link.addEventListener("click", () => {
+        const anchor = document.getElementById(link.dataset.goto!);
+        if (!anchor) {
+          console.error(`No anchor element with ID ${link.dataset.goto} was found. Originating element:`, link);
+          return;
+        }
 
-      anchor.scrollIntoView({ behavior: "smooth" });
-      history.pushState(null, "", `#${link.dataset.goto}`);
-    });
-  }
+        anchor.scrollIntoView({ behavior: "smooth" });
+        history.pushState(null, "", `#${link.dataset.goto}`);
+      });
+    }
+  });
 </script>
