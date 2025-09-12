@@ -251,10 +251,13 @@ import { Image } from "astro:assets";
 </style>
 
 <script>
-  if (navigator.userAgent.includes("Chrome/")) {
-    document.querySelectorAll(".only-firefox").forEach(x => x.remove());
-  }
-  else {
-    document.querySelectorAll(".only-chrome").forEach(x => x.remove());
+  // running browser detction only on client side to avoid hydration
+  if (typeof window !== 'undefined') {
+    if (navigator.userAgent.includes("Chrome/")) {
+      document.querySelectorAll(".only-firefox").forEach(x => x.remove());
+    }
+    else {
+      document.querySelectorAll(".only-chrome").forEach(x => x.remove());
+    }
   }
 </script>
