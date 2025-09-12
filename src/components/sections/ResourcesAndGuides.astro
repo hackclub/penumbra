@@ -100,6 +100,11 @@ import { Image } from "astro:assets";
     display: flex;
     gap: 1em;
     padding: .5em;
+    transition: transform .25s;
+
+    &:hover {
+      transform: translateX(8px);
+    }
 
     @media screen and (max-width: 600px) {
       flex-direction: column;
